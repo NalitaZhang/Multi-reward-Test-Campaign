@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DT multi-rewarded test offer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f4f4f4;
+        }
+        .content-wrapper {
+            display: inline-block;
+            padding: 40px;
+            background-color: white;
+            border: 5px solid #cc3340; /* Frame color */
+            border-radius: 10px;
+        }
+        h1 {
+            color: #333;
+        }
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 16px;
+            color: white;
+            background-color: #cc3340;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-wrapper">
+        <h1>DT multi-rewarded test offer</h1>
+        <p>Click on the spacific button below to get rewarded:</p>
+
+        <!-- Links with placeholders for parameters -->
+        <a href="https://service.fyber.com/actions/v2" id="action1" class="button">action 1</a>
+        <a href="https://service.fyber.com/actions/v2" id="action2" class="button">action 2</a>
+        <a href="https://service.fyber.com/actions/v2" id="action3" class="button">action 3</a>
+    </div>
+
+    <script>
+        // Function to get all URL parameters and build a query string
+        function getUrlParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const paramsToPass = ['subid', 'appid', 'answer_received', 'google_ad_id', 'google_ad_limited_tracking_enable', 'ip'];
+
+            let queryParams = [];
+            paramsToPass.forEach(param => {
+                if (urlParams.has(param)) {
+                    queryParams.push(`${param}=${encodeURIComponent(urlParams.get(param))}`);
+                }
+            });
+
+            return queryParams.length ? '?' + queryParams.join('&') : '';
+        }
+
+        // Get the query string with parameters
+        const queryString = getUrlParameters();
+
+        // Add constant action_id values for each action
+        const actionIds = ['step1', 'step2', 'step3'];
+
+        // If queryString is not empty, append it to the button links
+        if (queryString) {
+            document.getElementById('action1').href += queryString + '&action_id=' + actionIds[0];
+            document.getElementById('action2').href += queryString + '&action_id=' + actionIds[1];
+            document.getElementById('action3').href += queryString + '&action_id=' + actionIds[2];
+        }
+    </script>
+
+</body>
+</html>
